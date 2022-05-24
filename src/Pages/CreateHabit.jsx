@@ -8,32 +8,16 @@ import { Link } from "react-router-dom";
 
 const CreateHabit = () => {
   const [input, setInput] = useState("");
-  const [habit, setHabit] = useState([]);
   const { createHabit, setCreateHabit } = useCreateHabit();
-  const [create, setCreate] = useState(false);
-  // const [erase, setErase] = useState(-1);
-
-  // const clickHandle = () => {
-  //   habit.splice(erase, 1);
-  // };
-
-  // console.log(habit);
-
-  useEffect(() => {
-    setCreateHabit(habit);
-  }, [habit]);
-
-  console.log("createHabit:::::::::::::::::::", createHabit);
+  console.log("createHabit::::", createHabit);
 
   return (
     <div className="h-screen w-screen flex flex-col  xl:px-20 lg:px-12 px-4">
-      {createHabit !== null && (
-        <Link to="/habit-tracker">
-          <div className=" flex justify-end ">
-            <MdArrowForwardIos className="lg:w-16 lg:h-16 md:w-12 md:h-12 w-10 h-10 text-green-700 mt-8" />
-          </div>
-        </Link>
-      )}
+      <Link to="/habit-tracker">
+        <div className=" flex justify-end ">
+          <MdArrowForwardIos className="lg:w-16 lg:h-16 md:w-12 md:h-12 w-10 h-10 text-green-700 mt-8" />
+        </div>
+      </Link>
       <div className="h-1/2 flex flex-col justify-center">
         <motion.div
           initial={{
@@ -85,8 +69,7 @@ const CreateHabit = () => {
           >
             <BsFillArrowRightCircleFill
               onClick={() => {
-                setCreate(!create);
-                setHabit((createHabit) => [...createHabit, input]);
+                setCreateHabit([...createHabit, input]);
                 setInput("");
               }}
               className="text-cyan-500 cursor-pointer lg:text-[70px] md:text-[55px] text-[45px] hover:text-cyan-400"
@@ -100,15 +83,12 @@ const CreateHabit = () => {
             <span className="text-gray-800 lg:text-[40px] md:text-[30px] text-[26px] font-thin ">
               {item}
             </span>
-            {/* <RiDeleteBin6Line
+            <RiDeleteBin6Line
               className="lg:text-[40px] md:text-[30px] text-[26px] cursor-pointer text-purple-700 mx-5 "
               onClick={() => {
-                {
-                  setErase(index);
-                  clickHandle();
-                }
+                setCreateHabit(createHabit.filter((i, ind) => ind !== index));
               }}
-            /> */}
+            />
           </div>
         ))}
       </div>

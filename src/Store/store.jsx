@@ -107,11 +107,25 @@ export const useFontColor = create(
     )
   )
 );
+export const isActive = create(
+  devtools(
+    persist(
+      (set) => ({
+        active: false,
+        setActive: (active) => set((state) => ({ ...state, active })),
+      }),
+      {
+        name: "isActive",
+        getStorage: () => sessionStorage,
+      }
+    )
+  )
+);
 export const useCreateHabit = create(
   devtools(
     persist(
       (set) => ({
-        createHabit: Array,
+        createHabit: [],
         setCreateHabit: (createHabit) =>
           set((state) => ({ ...state, createHabit })),
       }),
